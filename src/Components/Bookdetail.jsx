@@ -15,7 +15,7 @@ export class BookDetail extends Component {
   }
 
   componentDidMount() {
-    this.fetchBook(this.props.match.params.id);
+    this.fetchBook(this.props.match.params.bookId);
   }
 
   fetchBook = (id) => {
@@ -40,12 +40,12 @@ export class BookDetail extends Component {
     axios.put(`http://localhost:5000/books/${id}`, {
       id, category, title,
     }).then(() => {
-      this.fetchBook(this.props.match.params.id);
+      this.fetchBook(this.props.match.params.bookId);
     });
   };
 
   goBack = () => {
-    // TODO: The user should go back to the previous page when this function is called
+    this.props.history.goBack();
   };
 
   render() {

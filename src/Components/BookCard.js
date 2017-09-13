@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export const BookCard = ({book}) =>
   <div className="col s12 m4">
@@ -7,7 +8,7 @@ export const BookCard = ({book}) =>
         <span className="card-title">{book.title}</span>
       </div>
       <div className="card-action">
-        <a href={`/${book.id}`}>Details</a>
+        <Link to={`/books/${book.id}`}>Details</Link>
       </div>
     </div>
   </div>;

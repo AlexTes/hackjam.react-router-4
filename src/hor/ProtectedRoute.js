@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Redirect, Route} from "react-router-dom";
 import {fakeAuth} from '../fakeAuth';
+import {TopSecretComponent} from '../Components/TopSecretComponent';
 
 /**
  * This component should return
@@ -15,5 +16,26 @@ import {fakeAuth} from '../fakeAuth';
  * The route your return  should keep its props like path, exact, ..
  */
 
-export const ProtectedRoute = () =>
-  <div>I think there's something wrong with this higher order ....</div>;
+export class ProtectedRoute extends Component {
+  state = {
+    authenticated: false,
+  };
+
+  componentDidMount() {
+    fakeAuth
+      .subscribe(authenticated => this.setState({authenticated}));
+  }
+
+  render() {
+    const {authenticated} = this.state;
+    return (
+      <Route exact path="/secret" render={() => (
+        authenticated ? (
+          <TopSecretComponent />
+        ) : (
+          <Redirect to="/"/>
+        )
+      )}/>
+    )
+  }
+}

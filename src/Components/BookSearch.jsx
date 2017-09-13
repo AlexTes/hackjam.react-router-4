@@ -29,9 +29,9 @@ export class BookSearch extends Component {
   render() {
     const books = this.state.books.map(book => {
       return (
-          <a href={`/${book.id}`} key={book.id} className="collection-item">
+          <Link to={`/books/${book.id}`} key={book.id} className="collection-item">
             {book.title}
-          </a>
+          </Link>
       )
     });
     return (
